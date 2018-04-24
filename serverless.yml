@@ -1,0 +1,16 @@
+# Deploy with:
+# serverless deploy --aws-profile park-envs
+
+service: clean-unused-elastic-ips
+
+provider:
+  name: aws
+  runtime: python3.6
+
+functions:
+  hello:
+    handler: handler.cleanip
+    cron:  # Setup scheduled trigger with cron expression
+      active: true
+      # 18:05 every Friday
+      value: '5 18 * * 5'
