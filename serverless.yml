@@ -7,6 +7,9 @@ provider:
   name: aws
   runtime: python3.6
   region: us-east-1
+  stackTags:
+    costBucket: DevOps
+    costBucketProject: DevOps
   iamRoleStatements:
     #ec2 actions
     - Effect: 'Allow'
@@ -17,6 +20,7 @@ provider:
 functions:
   cleanip:
     handler: handler.cleanip
+    timeout: 120
     cron:  # Setup scheduled trigger with cron expression
       active: true
       # 17:05 every Friday

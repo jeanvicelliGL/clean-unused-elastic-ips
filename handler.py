@@ -9,7 +9,7 @@ def cleanip(event, context):
     client = boto3.client('ec2')
     addresses_dict = client.describe_addresses()
     for eip_dict in addresses_dict['Addresses']:
-        if "InstanceId" not in eip_dict:
+        if ("InstanceId" not in eip_dict) and ("PrivateIpAddress" not in eip_dict):
             LOGGER.info(eip_dict['PublicIp'] +
                    " doesn't have any instances associated, releasing" )
             client.release_address(AllocationId=eip_dict['AllocationId'])
